@@ -68,10 +68,8 @@ function calculateCalories(e) {
 }
 
 function getCaloriesFromInputs(list) {
-  let calories = 0;
-
-  for (const item of list) {
-    const currVal = cleanInputString(item.value);
+  return Array.from(list).reduce((acc, curr) => {
+    const currVal = cleanInputString(curr.value);
     const invalidInputMatch = isInvalidInput(currVal);
 
     if (invalidInputMatch) {
@@ -79,9 +77,8 @@ function getCaloriesFromInputs(list) {
       isError = true;
       return null;
     }
-    calories += Number(currVal);
-  }
-  return calories;
+    return acc + Number(currVal);
+  }, 0);
 }
 
 function clearForm() {
